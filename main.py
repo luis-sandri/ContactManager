@@ -1,10 +1,10 @@
 import unittest
 
 class TestTaskManager(unittest.TestCase):
-    def test_add_task(self):
-        # Test adding a task
-        pass
+    def test_search_contact_name(self):
+        # Test searching for a contact by name
+        self.assertTrue(search_contact_name("Leandro", "41992020511"))
 
-    def test_remove_task(self):
-        # Test removing a task
-        pass
+    def test_block_contact_number(self):
+        # Test blocking a contact number
+        self.assertTrue(block_contact_number("Leandro", "41992020511"))
