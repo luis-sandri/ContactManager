@@ -5,9 +5,9 @@ class TestTaskManager(unittest.TestCase):
         # Test searching for a contact by name
         self.assertTrue(search_contact_name("Leandro", "41992020511"))
 
-    def test_block_contact_number(self):
-        # Test blocking a contact number
-        self.assertTrue(block_contact_number("Leandro", "41992020511"))
+    def test_add_contact_category(self):
+        # Test adding a contact to a category
+        self.assertTrue(add_contact_category("Leandro", "41992020511"))
 
 if __name__ == "__main__":
     unittest.main()
