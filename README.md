@@ -1,6 +1,6 @@
 # Gerenciador de contatos
 
-Projeto acadêmico de gerenciamento de contatos. As funções disponíveis são criar um contato e excluir um contato pelo ID. Os dados ficam salvos em `dados.json`, sem campo de telefone.
+Projeto acadêmico de gerenciamento de contatos. As funções disponíveis são criar um contato, excluir um contato pelo ID, buscar um contato pelo nome e criar uma categoria. Os dados ficam salvos em `dados.json`, sem campo de telefone.
 
 ## Preparar o ambiente
 
@@ -32,6 +32,22 @@ criar_contato("Bruno Lima")
 ```
 
 Cada contato recebe um ID automático, nome, cargo vazio, `categoria_id` sem associação e `favorito` falso. Os contatos existentes são preservados. Não há validação de nomes duplicados.
+
+### Buscar um contato pelo nome
+
+```python
+buscar_contatos("Ana Silva")
+```
+
+A função ordena os contatos pelo nome e realiza uma busca binária, retornando o dicionário do contato encontrado ou `None` caso o nome não esteja cadastrado.
+
+### Criar categorias
+
+```python
+criar_categoria("Trabalho")
+```
+
+Cada categoria criada recebe um ID automático e o nome informado, sendo adicionada à lista `"categorias"` em `dados.json`.
 
 ### Consultar o arquivo e encontrar o ID
 
@@ -74,7 +90,7 @@ O `dados.json` já acompanha o projeto com a estrutura inicial:
 }
 ```
 
-O arquivo precisa existir e conter um JSON válido. `categoria_id` está reservado para associar um contato ao ID de uma categoria; as funcionalidades de categorias ainda não estão implementadas.
+O arquivo precisa existir e conter um JSON válido. As categorias criadas são salvas em `"categorias"`, e `categoria_id` nos contatos está reservado para associar um contato ao ID de uma categoria.
 
 ## Executar os testes
 
@@ -83,6 +99,8 @@ No terminal, fora do console Python e na raiz do projeto:
 ```bash
 python -m pytest tests/luis/test_criar_contato.py -v
 python -m pytest tests/luis/test_deletar_contatos.py -v
+python -m pytest tests/leandro/test_buscar_contatos.py -v
+python -m pytest tests/leandro/test_criar_categorias.py -v
 ```
 
 Para executar todos os testes:
@@ -91,4 +109,4 @@ Para executar todos os testes:
 python -m pytest
 ```
 
-Os testes de criação e exclusão usam arquivos JSON temporários e não alteram o `dados.json` do projeto. Os testes das demais funcionalidades ficam nas pastas dos respectivos responsáveis; alguns ainda estão marcados como pendentes (`skipped`).
+Os testes usam arquivos JSON temporários e não alteram o `dados.json` do projeto. Os testes das demais funcionalidades ficam nas pastas dos respectivos responsáveis; alguns ainda estão marcados como pendentes (`skipped`).
