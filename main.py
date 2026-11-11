@@ -18,3 +18,16 @@ def criar_contato(nome, arquivo=Path(__file__).with_name("dados.json")):
     arquivo.write_text(
         json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+
+
+def deletar_contato(contato_id, arquivo=Path(__file__).with_name("dados.json")):
+    arquivo = Path(arquivo)
+    dados = json.loads(arquivo.read_text(encoding="utf-8"))
+
+    dados["contatos"] = [
+        contato for contato in dados["contatos"] if contato["id"] != contato_id
+    ]
+
+    arquivo.write_text(
+        json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
