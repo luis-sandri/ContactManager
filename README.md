@@ -58,8 +58,6 @@ Esse comando mostra o arquivo JSON para você copiar o campo `id` do contato na 
 
 ### Categorizar um contato
 
-Substitua os textos abaixo pelo ID de Ana e pelo ID da categoria Trabalho, mantendo as aspas.
-
 ```python
 categorizar_contato("cole-o-id-da-ana-aqui", "cole-o-id-da-categoria-aqui")
 ```
@@ -68,8 +66,6 @@ A função grava o ID da categoria no campo `categoria_id` do contato. Se o cont
 
 ### Filtrar contatos por categoria
 
-Substitua o texto abaixo pelo ID da categoria Trabalho, mantendo as aspas.
-
 ```python
 filtrar_por_categoria("cole-o-id-da-categoria-aqui")
 ```
@@ -77,8 +73,6 @@ filtrar_por_categoria("cole-o-id-da-categoria-aqui")
 A função retorna a lista de contatos associados à categoria, na ordem em que aparecem em `dados.json`. Se a categoria não existir ou estiver sem contatos, a função retorna `[]`.
 
 ### Excluir um contato
-
-Substitua o texto abaixo pelo ID de Ana, mantendo as aspas:
 
 ```python
 deletar_contato("cole-o-id-da-ana-aqui")
