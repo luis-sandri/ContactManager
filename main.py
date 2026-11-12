@@ -68,3 +68,24 @@ def criar_categoria(nome, arquivo=Path(__file__).with_name("dados.json")):
         json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
+def categorizar_contato(contato_id, categoria_id, arquivo=Path(__file__).with_name("dados.json")):
+    arquivo = Path(arquivo)
+    dados = json.loads(arquivo.read_text(encoding="utf-8"))
+    if not any(categoria["id"] == categoria_id for categoria in dados["categorias"]):
+        return
+
+    for contato in dados["contatos"]:
+        if contato["id"] == contato_id:
+            contato["categoria_id"] = categoria_id
+            arquivo.write_text(json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8")
+            return
+
+
+def filtrar_por_categoria(categoria_id, arquivo=Path(__file__).with_name("dados.json")):
+    dados = json.loads(Path(arquivo).read_text(encoding="utf-8"))
+    if not any(categoria["id"] == categoria_id for categoria in dados["categorias"]):
+        return []
+
+    return [
+        contato for contato in dados["contatos"] if contato.get("categoria_id") == categoria_id
+    ]
