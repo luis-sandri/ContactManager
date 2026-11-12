@@ -1,6 +1,6 @@
 # Gerenciador de contatos
 
-Projeto acadêmico de gerenciamento de contatos. As funções disponíveis são criar um contato, excluir um contato pelo ID, buscar um contato pelo nome e criar uma categoria. Os dados ficam salvos em `dados.json`, sem campo de telefone.
+Projeto acadêmico de gerenciamento de contatos. As funções disponíveis são criar um contato, excluir um contato pelo ID, buscar um contato pelo nome, criar uma categoria, categorizar um contato e filtrar contatos por categoria. Os dados ficam salvos em `dados.json`, sem campo de telefone.
 
 ## Preparar o ambiente
 
@@ -54,8 +54,27 @@ Cada categoria criada recebe um ID automático e o nome informado, sendo adicion
 ```python
 print(Path("dados.json").read_text(encoding="utf-8"))
 ```
+Esse comando mostra o arquivo JSON para você copiar o campo `id` do contato na lista `"contatos"` e o campo `id` da categoria na lista `"categorias"`.
 
-Esse comando mostra o arquivo JSON para você copiar o campo `id` do contato que deseja excluir.
+### Categorizar um contato
+
+Substitua os textos abaixo pelo ID de Ana e pelo ID da categoria Trabalho, mantendo as aspas.
+
+```python
+categorizar_contato("cole-o-id-da-ana-aqui", "cole-o-id-da-categoria-aqui")
+```
+
+A função grava o ID da categoria no campo `categoria_id` do contato. Se o contato já tiver uma categoria, ela é substituída. A associação só é gravada quando os dois IDs existem.
+
+### Filtrar contatos por categoria
+
+Substitua o texto abaixo pelo ID da categoria Trabalho, mantendo as aspas.
+
+```python
+filtrar_por_categoria("cole-o-id-da-categoria-aqui")
+```
+
+A função retorna a lista de contatos associados à categoria, na ordem em que aparecem em `dados.json`. Se a categoria não existir ou estiver sem contatos, a função retorna `[]`.
 
 ### Excluir um contato
 
@@ -90,7 +109,7 @@ O `dados.json` já acompanha o projeto com a estrutura inicial:
 }
 ```
 
-O arquivo precisa existir e conter um JSON válido. As categorias criadas são salvas em `"categorias"`, e `categoria_id` nos contatos está reservado para associar um contato ao ID de uma categoria.
+O arquivo precisa existir e conter um JSON válido. As categorias criadas são salvas em `"categorias"`, e o campo `categoria_id` guarda o ID da categoria associada ao contato. Ao criar um contato, esse campo começa com `null`.
 
 ## Executar os testes
 
@@ -101,6 +120,8 @@ python -m pytest tests/luis/test_criar_contato.py -v
 python -m pytest tests/luis/test_deletar_contatos.py -v
 python -m pytest tests/leandro/test_buscar_contatos.py -v
 python -m pytest tests/leandro/test_criar_categorias.py -v
+python -m pytest tests/marcelo/test_categorizar_contato.py -v
+python -m pytest tests/marcelo/test_filtrar_por_categoria.py -v
 ```
 
 Para executar todos os testes:
