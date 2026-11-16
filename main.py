@@ -89,3 +89,26 @@ def filtrar_por_categoria(categoria_id, arquivo=Path(__file__).with_name("dados.
     return [
         contato for contato in dados["contatos"] if contato.get("categoria_id") == categoria_id
     ]
+
+
+def listar_contatos(arquivo=Path(__file__).with_name("dados.json")):
+    dados = json.loads(Path(arquivo).read_text(encoding="utf-8"))
+    contatos = []
+    for contato in dados["contatos"]:
+        contatos.append(contato)
+    contatos.sort(key=lambda contato: contato["nome"])
+
+    return contatos
+
+
+def favoritar_contato(contato_id, arquivo=Path(__file__).with_name("dados.json")):
+    arquivo = Path(arquivo)
+    dados = json.loads(arquivo.read_text(encoding="utf-8"))
+
+    for contato in dados["contatos"]:
+        if contato["id"] == contato_id:
+            contato["favorito"] = True
+            arquivo.write_text(
+                json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+            return
