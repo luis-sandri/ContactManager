@@ -112,3 +112,38 @@ def favoritar_contato(contato_id, arquivo=Path(__file__).with_name("dados.json")
                 json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8"
             )
             return
+
+
+def editar_nome(id_contato, novo_nome, arquivo=Path(__file__).with_name("dados.json")):
+    arquivo = Path(arquivo)
+    dados = json.loads(arquivo.read_text(encoding="utf-8"))
+
+    for contato in dados["contatos"]:
+        if contato["id"] == str(id_contato):
+            contato["nome"] = novo_nome
+
+            arquivo.write_text(
+                json.dumps(dados, ensure_ascii=False, indent=2),
+                encoding="utf-8"
+            )
+            return True
+
+    return False
+
+
+
+def editar_cargo(id_contato, novo_cargo, arquivo=Path(__file__).with_name("dados.json")):
+    arquivo = Path(arquivo)
+    dados = json.loads(arquivo.read_text(encoding="utf-8"))
+
+    for contato in dados["contatos"]:
+        if contato["id"] == str(id_contato):
+            contato["cargo"] = novo_cargo
+
+            arquivo.write_text(
+                json.dumps(dados, ensure_ascii=False, indent=2),
+                encoding="utf-8"
+            )
+            return True
+
+    return False
